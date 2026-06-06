@@ -1,0 +1,1048 @@
+    /*
+      TEMPLATE CSS SEM CLASSES — V2
+      ----------------------------------------------------------------------
+      Filosofia:
+      - O agente escreve HTML semântico simples.
+      - O CSS cuida do design automaticamente.
+      - Não usa Tailwind, não usa build, não exige classes no corpo.
+      - O primeiro <section> dentro de <main> vira o "hero" executivo.
+      - <section> com <article> vira grid de cards.
+      - <table>, <figure>, <details>, <aside>, <blockquote> já saem bonitos.
+    */
+
+    :root {
+      color-scheme: light;
+
+      --bg: #f6f8fc;
+      --bg-grid: rgba(15, 23, 42, 0.045);
+
+      --surface: #ffffff;
+      --surface-soft: #f8fafc;
+      --surface-blue: #eff6ff;
+
+      --text: #080f24;
+      --muted: #475569;
+      --subtle: #64748b;
+
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+
+      --primary: #2563eb;
+      --primary-2: #0ea5e9;
+      --primary-strong: #1d4ed8;
+      --primary-soft: #dbeafe;
+
+      --success: #10b981;
+      --success-soft: #d1fae5;
+
+      --warning: #f59e0b;
+      --warning-soft: #fef3c7;
+
+      --danger: #ef4444;
+      --danger-soft: #fee2e2;
+
+      --purple: #7c3aed;
+      --purple-soft: #ede9fe;
+
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 28px;
+
+      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 14px 34px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 24px 70px rgba(15, 23, 42, 0.13);
+
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 14% -10%, rgba(37, 99, 235, 0.16), transparent 32rem),
+        radial-gradient(circle at 92% 8%, rgba(14, 165, 233, 0.12), transparent 28rem),
+        radial-gradient(circle at 55% 0%, rgba(124, 58, 237, 0.08), transparent 30rem),
+        linear-gradient(var(--bg-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px),
+        linear-gradient(180deg, #fbfdff 0%, var(--bg) 42%, #eef2f7 100%);
+      background-size:
+        auto,
+        auto,
+        auto,
+        24px 24px,
+        24px 24px,
+        auto;
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        Helvetica,
+        sans-serif;
+      font-size: 15px;
+      line-height: 1.58;
+      padding: clamp(14px, 3vw, 42px);
+    }
+
+    main {
+      width: min(var(--max), 100%);
+      margin: 0 auto;
+    }
+
+    /*
+      HERO EXECUTIVO AUTOMÁTICO
+      ----------------------------------------------------------------------
+      O primeiro <section> vira um bloco parecido com dashboard premium.
+      Recomendação para o agente:
+        <section>
+          <p>Relatório Executivo · Concluído · Auditoria NFe</p>
+          <h1>Saídas do CNPJ <strong>15.436.940/0016-81</strong></h1>
+          <p>Descrição curta...</p>
+          <p>Período... Run ID... Fonte...</p>
+        </section>
+    */
+
+    main > section:first-child {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      min-height: 340px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 360px;
+      gap: clamp(20px, 4vw, 40px);
+      align-items: center;
+      border: 1px solid rgba(191, 219, 254, 0.9);
+      border-radius: var(--radius-lg);
+      padding: clamp(26px, 5vw, 48px) clamp(22px, 5vw, 42px);
+      margin-bottom: 20px;
+      background:
+        radial-gradient(circle at 80% 12%, rgba(186, 230, 253, 0.9), transparent 18rem),
+        radial-gradient(circle at 15% 14%, rgba(219, 234, 254, 0.92), transparent 22rem),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.97), rgba(239, 246, 255, 0.9));
+      box-shadow: var(--shadow-lg);
+    }
+
+    main > section:first-child::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      background:
+        linear-gradient(rgba(37, 99, 235, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37, 99, 235, 0.055) 1px, transparent 1px);
+      background-size: 24px 24px;
+      mask-image: linear-gradient(90deg, rgba(0,0,0,0.35), transparent 72%);
+    }
+
+    main > section:first-child::after {
+      content: "";
+      position: absolute;
+      right: -70px;
+      top: -90px;
+      z-index: -2;
+      width: 360px;
+      height: 360px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 38% 38%, rgba(59, 130, 246, 0.25), rgba(59, 130, 246, 0.04) 62%, transparent 63%);
+      filter: blur(0.2px);
+    }
+
+    main > section:first-child > * {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+    }
+
+    /*
+      O último parágrafo do primeiro section vira o card de saúde/metadados
+      quando existe espaço lateral. Em mobile ele volta para baixo.
+    */
+    main > section:first-child > p:last-child {
+      grid-column: 2;
+      grid-row: 1 / span 4;
+      align-self: center;
+      justify-self: end;
+      width: min(100%, 350px);
+      max-width: 350px;
+      min-height: 210px;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 12px;
+      border: 1px solid rgba(226, 232, 240, 0.95);
+      border-radius: 22px;
+      padding: 24px;
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow:
+        0 16px 40px rgba(15, 23, 42, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      color: var(--muted);
+      backdrop-filter: blur(18px);
+      font-size: 13px;
+    }
+
+    main > section:first-child > p:last-child::before {
+      content: "Saúde do relatório";
+      color: #64748b;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    main > section:first-child > p:last-child::after {
+      content: "92/100";
+      order: -1;
+      display: block;
+      margin-bottom: 2px;
+      color: var(--text);
+      font-size: 34px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+    }
+
+    main > section:first-child > p:first-child {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 20px;
+      color: var(--primary-strong);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    main > section:first-child > p:first-child::before,
+    main > section:first-child > p:first-child::after {
+      content: "";
+      display: none;
+    }
+
+    main > section:first-child > p:first-child {
+      /*
+        Visual de badge mesmo quando o agente escreve texto simples.
+      */
+      width: fit-content;
+      max-width: 100%;
+      border: 1px solid #bfdbfe;
+      border-radius: 999px;
+      padding: 6px 12px;
+      background: rgba(239, 246, 255, 0.86);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    }
+
+    main > section:first-child h1 {
+      margin: 0;
+      max-width: 820px;
+      color: var(--text);
+      font-size: clamp(42px, 6vw, 66px);
+      line-height: 0.98;
+      letter-spacing: -0.07em;
+      font-weight: 950;
+    }
+
+    main > section:first-child h1 strong {
+      display: block;
+      margin-top: 4px;
+      color: #2563eb;
+      font-weight: 950;
+      letter-spacing: -0.075em;
+    }
+
+    main > section:first-child h1 code,
+    main > section:first-child h1 strong code {
+      font: inherit;
+      color: inherit;
+      background: transparent;
+      border: 0;
+      padding: 0;
+    }
+
+    main > section:first-child h1 + p {
+      max-width: 760px;
+      margin: 20px 0 0;
+      color: #475569;
+      font-size: clamp(16px, 2vw, 20px);
+      line-height: 1.55;
+    }
+
+    main > section:first-child h1 + p strong {
+      color: var(--text);
+    }
+
+    main > section:first-child code {
+      border-color: rgba(191, 219, 254, 0.9);
+      background: rgba(255, 255, 255, 0.82);
+      color: #1e3a8a;
+    }
+
+    /*
+      SEÇÕES PADRÃO
+    */
+
+    section {
+      margin: 18px 0;
+      border: 1px solid rgba(226, 232, 240, 0.92);
+      border-radius: var(--radius-lg);
+      padding: clamp(18px, 3vw, 30px);
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: var(--shadow-md);
+      backdrop-filter: blur(14px);
+    }
+
+    section:has(> article) {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      padding: 0;
+    }
+
+    section:has(> h2 + article) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border: 1px solid rgba(226, 232, 240, 0.92);
+      border-radius: var(--radius-lg);
+      padding: clamp(18px, 3vw, 30px);
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: var(--shadow-md);
+    }
+
+    section:has(> h2 + article) > h2,
+    section:has(> h2 + article) > p,
+    section:has(> h2 + article) > aside,
+    section:has(> h2 + article) > blockquote {
+      grid-column: 1 / -1;
+    }
+
+    article {
+      position: relative;
+      overflow: hidden;
+      min-height: 150px;
+      border: 1px solid rgba(226, 232, 240, 0.95);
+      border-radius: var(--radius-md);
+      padding: 22px 20px;
+      background:
+        radial-gradient(circle at 100% 0%, rgba(219, 234, 254, 0.88), transparent 92px),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.94));
+      box-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.05),
+        0 12px 28px rgba(15, 23, 42, 0.07);
+    }
+
+    article::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(15, 23, 42, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 23, 42, 0.025) 1px, transparent 1px);
+      background-size: 22px 22px;
+      mask-image: radial-gradient(circle at 100% 0%, black, transparent 52%);
+      pointer-events: none;
+    }
+
+    article > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /*
+      TIPOGRAFIA
+    */
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      margin: 0;
+      color: var(--text);
+      font-weight: 850;
+    }
+
+    h1 {
+      margin-bottom: 8px;
+      font-size: clamp(30px, 4.4vw, 48px);
+      line-height: 1.05;
+      letter-spacing: -0.055em;
+    }
+
+    h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      font-size: clamp(21px, 2.8vw, 30px);
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+    }
+
+    h2::before {
+      content: "";
+      flex: 0 0 8px;
+      width: 8px;
+      height: 28px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--primary), var(--primary-2));
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: clamp(17px, 2vw, 21px);
+      line-height: 1.24;
+      letter-spacing: -0.025em;
+    }
+
+    h4 {
+      margin: 18px 0 8px;
+      font-size: 15px;
+      letter-spacing: -0.01em;
+    }
+
+    p {
+      margin: 0 0 12px;
+      color: var(--muted);
+    }
+
+    article p {
+      margin-bottom: 8px;
+    }
+
+    strong {
+      color: var(--text);
+      font-weight: 850;
+    }
+
+    small {
+      color: var(--subtle);
+      font-size: 12px;
+    }
+
+    mark {
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary-strong);
+      font-weight: 800;
+    }
+
+    /*
+      KPI automático:
+      <article>
+        <h3>Valor total</h3>
+        <p><strong>R$ 295,7k</strong></p>
+        <p>Descrição</p>
+      </article>
+    */
+    article > p:first-of-type strong:only-child {
+      display: block;
+      margin: 8px 0 6px;
+      color: #111827;
+      font-size: clamp(31px, 4vw, 42px);
+      line-height: 0.95;
+      font-weight: 950;
+      letter-spacing: -0.07em;
+    }
+
+    article > h3 + p {
+      color: var(--subtle);
+    }
+
+    /*
+      LISTAS
+    */
+
+    ul,
+    ol {
+      margin: 12px 0 0;
+      padding-left: 0;
+    }
+
+    li {
+      position: relative;
+      margin: 9px 0;
+      padding-left: 28px;
+      color: var(--muted);
+    }
+
+    ul li {
+      list-style: none;
+    }
+
+    ul li::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 0.73em;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--primary);
+      box-shadow: 0 0 0 4px var(--primary-soft);
+    }
+
+    ol {
+      counter-reset: item;
+    }
+
+    ol li {
+      list-style: none;
+      counter-increment: item;
+    }
+
+    ol li::before {
+      content: counter(item);
+      position: absolute;
+      left: 0;
+      top: 0.12em;
+      display: grid;
+      place-items: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary-strong);
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    /*
+      TABELAS
+    */
+
+    table {
+      width: 100%;
+      margin-top: 16px;
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+    }
+
+    caption {
+      caption-side: top;
+      padding: 0 0 10px;
+      color: var(--subtle);
+      text-align: left;
+      font-size: 13px;
+    }
+
+    thead {
+      background: linear-gradient(180deg, #f8fafc, #eef2ff);
+    }
+
+    th,
+    td {
+      border: 0;
+      border-bottom: 1px solid var(--border);
+      padding: 13px 14px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 13px;
+    }
+
+    th {
+      color: #334155;
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.065em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    td {
+      color: #1e293b;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    tbody tr:hover {
+      background: #eff6ff;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    td:first-child {
+      font-weight: 750;
+    }
+
+    td code {
+      font-size: 12px;
+    }
+
+    /*
+      FIGURAS
+    */
+
+    figure {
+      margin: 18px 0 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: clamp(10px, 2vw, 16px);
+      background:
+        linear-gradient(180deg, #ffffff, #f8fafc);
+      box-shadow: var(--shadow-sm);
+    }
+
+    figure:first-child {
+      margin-top: 0;
+    }
+
+    img,
+    svg,
+    canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+      border-radius: var(--radius-md);
+    }
+
+    figure img {
+      border: 1px solid var(--border);
+      background: #ffffff;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.07);
+    }
+
+    figcaption {
+      margin-top: 10px;
+      color: var(--subtle);
+      font-size: 13px;
+    }
+
+
+    /*
+      PLOTLY / GRÁFICOS INTERATIVOS
+      ----------------------------------------------------------------------
+      O agente pode usar apenas:
+        <section>
+          <h2>Análise visual interativa</h2>
+          <figure>
+            <div id="plotly-produtos"></div>
+            <figcaption>...</figcaption>
+          </figure>
+        </section>
+      O CSS abaixo transforma qualquer div com id começando por "plotly-" em
+      um container visual consistente.
+    */
+
+    div[id^="plotly-"] {
+      width: 100%;
+      min-height: 380px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: #ffffff;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+      overflow: hidden;
+    }
+
+    @media (max-width: 720px) {
+      div[id^="plotly-"] {
+        min-height: 320px;
+      }
+    }
+
+    /*
+      NOTAS, CITAÇÕES E ACCORDIONS
+    */
+
+    aside {
+      margin: 16px 0 0;
+      border: 1px solid #bfdbfe;
+      border-left: 5px solid var(--primary);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      background: #eff6ff;
+      color: #1e3a8a;
+    }
+
+    aside p,
+    aside li {
+      color: #1e3a8a;
+    }
+
+    aside strong {
+      color: #172554;
+    }
+
+    blockquote {
+      margin: 16px 0 0;
+      border-left: 5px solid var(--purple);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 14px 18px;
+      background: var(--purple-soft);
+      color: #4c1d95;
+      font-weight: 650;
+    }
+
+    blockquote p {
+      color: #4c1d95;
+    }
+
+    details {
+      margin: 12px 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: #ffffff;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    summary {
+      cursor: pointer;
+      padding: 14px 16px;
+      color: var(--text);
+      font-weight: 850;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      float: right;
+      color: var(--primary);
+      font-weight: 950;
+    }
+
+    details[open] summary {
+      border-bottom: 1px solid var(--border);
+      background: #f8fafc;
+    }
+
+    details[open] summary::after {
+      content: "−";
+    }
+
+    details > *:not(summary) {
+      margin: 14px 16px;
+    }
+
+    /*
+      CÓDIGO
+    */
+
+    code,
+    kbd,
+    pre {
+      font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Monaco,
+        Consolas,
+        "Liberation Mono",
+        "Courier New",
+        monospace;
+    }
+
+    code {
+      padding: 2px 6px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: #f8fafc;
+      color: #1e3a8a;
+      font-size: 0.92em;
+    }
+
+    pre {
+      max-width: 100%;
+      margin: 16px 0 0;
+      overflow-x: auto;
+      border: 1px solid #1e293b;
+      border-radius: var(--radius-md);
+      padding: 16px;
+      background: #0f172a;
+      color: #e2e8f0;
+      box-shadow: var(--shadow-sm);
+      -webkit-overflow-scrolling: touch;
+    }
+
+    pre code {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    /*
+      LINKS / ENTREGÁVEIS
+    */
+
+    a {
+      color: var(--primary-strong);
+      font-weight: 750;
+      text-decoration: none;
+      text-underline-offset: 3px;
+    }
+
+    a:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    li a[href$=".zip"],
+    li a[href$=".csv"],
+    li a[href$=".xlsx"],
+    li a[href$=".pdf"],
+    li a[href$=".html"],
+    p a[href$=".zip"],
+    p a[href$=".csv"],
+    p a[href$=".xlsx"],
+    p a[href$=".pdf"],
+    p a[href$=".html"] {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      max-width: 100%;
+      padding: 11px 15px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: #ffffff;
+      box-shadow: 0 14px 26px rgba(37, 99, 235, 0.22);
+      text-decoration: none;
+    }
+
+    li a[href$=".zip"]::after,
+    li a[href$=".csv"]::after,
+    li a[href$=".xlsx"]::after,
+    li a[href$=".pdf"]::after,
+    li a[href$=".html"]::after,
+    p a[href$=".zip"]::after,
+    p a[href$=".csv"]::after,
+    p a[href$=".xlsx"]::after,
+    p a[href$=".pdf"]::after,
+    p a[href$=".html"]::after {
+      content: "↗";
+      font-size: 13px;
+    }
+
+    hr {
+      margin: 22px 0;
+      border: 0;
+      border-top: 1px solid var(--border);
+    }
+
+    ::selection {
+      background: var(--primary-soft);
+      color: #1e3a8a;
+    }
+
+    :focus-visible {
+      outline: 3px solid rgba(37, 99, 235, 0.35);
+      outline-offset: 3px;
+      border-radius: 8px;
+    }
+
+    /*
+      RESPONSIVO
+    */
+
+    @media (max-width: 980px) {
+      main > section:first-child {
+        grid-template-columns: 1fr;
+        min-height: unset;
+      }
+
+      main > section:first-child > p:last-child {
+        grid-column: 1;
+        grid-row: auto;
+        justify-self: start;
+        width: 100%;
+        max-width: 100%;
+        min-height: unset;
+      }
+
+      section:has(> article),
+      section:has(> h2 + article) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      body {
+        padding: 12px;
+        font-size: 14px;
+      }
+
+      main > section:first-child,
+      section,
+      article,
+      figure,
+      aside,
+      details,
+      pre {
+        border-radius: 18px;
+      }
+
+      main > section:first-child {
+        padding: 24px 18px;
+      }
+
+      main > section:first-child h1 {
+        font-size: clamp(36px, 12vw, 48px);
+      }
+
+      main > section:first-child h1 + p {
+        font-size: 16px;
+      }
+
+      main > section:first-child > p:first-child {
+        border-radius: 12px;
+      }
+
+      main > section:first-child > p:last-child {
+        padding: 18px;
+      }
+
+      section {
+        padding: 18px 14px;
+      }
+
+      section:has(> article),
+      section:has(> h2 + article) {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      h2 {
+        font-size: 21px;
+      }
+
+      table {
+        display: block;
+        max-width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      th,
+      td {
+        padding: 12px;
+      }
+
+      td:nth-child(2) {
+        min-width: 220px;
+        white-space: normal;
+      }
+
+      li a[href$=".zip"],
+      li a[href$=".csv"],
+      li a[href$=".xlsx"],
+      li a[href$=".pdf"],
+      li a[href$=".html"],
+      p a[href$=".zip"],
+      p a[href$=".csv"],
+      p a[href$=".xlsx"],
+      p a[href$=".pdf"],
+      p a[href$=".html"] {
+        width: 100%;
+      }
+    }
+
+    /*
+      IMPRESSÃO/PDF
+    */
+
+    @media print {
+      :root {
+        --bg: #ffffff;
+        --surface: #ffffff;
+        --text: #000000;
+        --muted: #333333;
+        --subtle: #555555;
+        --border: #dddddd;
+      }
+
+      body {
+        padding: 0;
+        background: #ffffff;
+      }
+
+      main {
+        width: 100%;
+      }
+
+      main > section:first-child,
+      section,
+      article,
+      figure,
+      aside,
+      details {
+        box-shadow: none;
+        break-inside: avoid;
+        background: #ffffff;
+      }
+
+      main > section:first-child {
+        display: block;
+        min-height: unset;
+        border: 1px solid #dddddd;
+      }
+
+      main > section:first-child h1,
+      main > section:first-child h1 strong,
+      main > section:first-child p {
+        color: #000000;
+      }
+
+      main > section:first-child > p:first-child,
+      main > section:first-child > p:last-child {
+        border: 0;
+        padding: 0;
+        margin: 8px 0;
+        background: transparent;
+        color: #333333;
+      }
+
+      main > section:first-child > p:last-child::before,
+      main > section:first-child > p:last-child::after {
+        display: none;
+      }
+
+      a {
+        color: #000000;
+        text-decoration: underline;
+      }
+
+      pre {
+        white-space: pre-wrap;
+        border-color: #dddddd;
+        background: #f8f8f8;
+        color: #000000;
+      }
+    }
